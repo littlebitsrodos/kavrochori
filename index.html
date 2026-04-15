@@ -6,7 +6,7 @@
 <title>Μεζονέτα με αυτόνομο διαμέρισμα — Καβροχώρι Γαζίου, Ηράκλειο Κρήτης</title>
 <meta name="description" content="Ανεξάρτητη κατοικία 292 τ.μ. σε οικόπεδο 713 τ.μ. στον οικισμό Καβροχωρίου. 7 λεπτά από ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο Κρήτης. Ιδανική για γιατρούς, ερευνητές, ακαδημαϊκούς.">
 <meta property="og:title" content="Μεζονέτα Καβροχωρίου — Κοντά σε ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο">
-<meta property="og:description" content="Ανεξάρτητη κατοικία με αυτόνομο διαμέρισμα στο ημιυπόγειο. Οικόπεδο 713 τ.μ., ξυλόφουρνος, θέα βουνό.">
+<meta property="og:description" content="Ανεξάρτητη κατοικία με αυτόνομο διαμέρισμα κήπου στο ημιισόγειο. Οικόπεδο 713 τ.μ., ξυλόφουρνος, θέα βουνό.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -76,7 +76,7 @@
     padding: 4rem 0 5rem;
     background:
       linear-gradient(180deg, rgba(250,250,247,0) 0%, rgba(250,250,247,0.7) 80%, var(--bg) 100%),
-      url('images/exterior-south.png') center/cover no-repeat;
+      url('images/exterior-street.jpg') center/cover no-repeat;
     min-height: 70vh;
     display: flex; align-items: center;
     position: relative;
@@ -153,6 +153,23 @@
   .distances td { padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--border); }
   .distances tr:last-child td { border-bottom: none; }
   .distances td:last-child { text-align: right; font-weight: 500; color: var(--accent-dark); white-space: nowrap; }
+
+  /* Bus info strip */
+  .bus-strip { margin-top: 1rem; background: var(--card); border-radius: 8px; border-left: 3px solid var(--accent); overflow: hidden; }
+  .bus-strip-header { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; cursor: pointer; user-select: none; }
+  .bus-strip-header:hover { background: var(--bg-alt); }
+  .bus-line-badge { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--accent-dark); white-space: nowrap; }
+  .bus-route { flex: 1; font-size: 0.9rem; color: var(--text-muted); }
+  .bus-freq { font-size: 0.85rem; font-weight: 500; color: var(--accent-dark); white-space: nowrap; }
+  .bus-info-btn { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--accent); color: var(--accent-dark); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
+  .bus-strip.open .bus-info-btn { background: var(--accent); color: #fff; }
+  .bus-schedule { display: none; padding: 0 1.2rem 1rem; }
+  .bus-strip.open .bus-schedule { display: block; }
+  .bus-schedule table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .bus-schedule th { text-align: left; color: var(--text-muted); font-weight: 400; padding: 0.3rem 0.8rem 0.3rem 0; border-bottom: 1px solid var(--border); }
+  .bus-schedule td { padding: 0.45rem 0.8rem 0.45rem 0; font-variant-numeric: tabular-nums; border-bottom: 1px solid var(--border); color: var(--text); }
+  .bus-schedule tr:last-child td { border-bottom: none; }
+  .bus-schedule td.note { font-size: 0.78rem; color: var(--text-muted); }
 
   /* Spaces */
   .spaces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
@@ -396,7 +413,7 @@
   /* Contact */
   .contact-section { background: var(--accent-dark); color: #fff; }
   .contact-section h2 { color: #fff; }
-  .contact-section p { opacity: 0.9; }
+  .contact-section p { color: rgba(255,255,255,0.92); }
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -405,21 +422,21 @@
   }
   @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
   .contact-info p { margin-bottom: 0.5rem; }
-  .contact-info a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); }
+  .contact-info a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.5); }
   .contact-info a:hover { text-decoration-color: #fff; }
-  .contact-form label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; opacity: 0.85; }
+  .contact-form label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: rgba(255,255,255,0.9); }
   .contact-form input, .contact-form textarea {
     width: 100%;
     padding: 0.8rem 1rem;
     margin-bottom: 1rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
     color: #fff;
     font: inherit;
     border-radius: 4px;
   }
-  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.4); }
-  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #fff; background: rgba(255,255,255,0.12); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.5); }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #fff; background: rgba(255,255,255,0.2); }
   .contact-form textarea { min-height: 120px; resize: vertical; }
   .contact-form button {
     background: #fff;
@@ -494,8 +511,8 @@
     <span class="hero-badge" lang="en">Kavrochori · Heraklion, Crete</span>
     <h1 lang="el">Ανεξάρτητη κατοικία<br>με αυτόνομο διαμέρισμα<br>στα δυτικά του Ηρακλείου.</h1>
     <h1 lang="en">Independent residence<br>with self-contained apartment<br>west of Heraklion.</h1>
-    <p class="subtitle" lang="el">Μεζονέτα 172 τ.μ. και ημιυπόγειο διαμέρισμα 120 τ.μ. σε οικόπεδο 713 τ.μ. Επτά λεπτά από ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο Κρήτης.</p>
-    <p class="subtitle" lang="en">172 sqm maisonette and 120 sqm semi-basement apartment on a 713 sqm plot. Seven minutes from the University Hospital, FORTH, and the University of Crete.</p>
+    <p class="subtitle" lang="el">Μεζονέτα 172 τ.μ. και διαμέρισμα κήπου 120 τ.μ. σε οικόπεδο 713 τ.μ. Επτά λεπτά από ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο Κρήτης.</p>
+    <p class="subtitle" lang="en">172 sqm maisonette and 120 sqm garden-level apartment on a 713 sqm plot. Seven minutes from the University Hospital, FORTH, and the University of Crete.</p>
     <div class="hero-meta">
       <span lang="el"><strong>292 τ.μ.</strong> συνολική δόμηση</span>
       <span lang="en"><strong>292 sqm</strong> total</span>
@@ -594,6 +611,46 @@
         <tr><td lang="el">Παραλία Αμμουδάρας (Γαζανός)</td><td lang="en">Ammoudara beach (Gazanos)</td><td>4,5 χλμ</td></tr>
       </table>
     </div>
+
+    <div class="bus-strip" id="bus-strip">
+      <div class="bus-strip-header" onclick="document.getElementById('bus-strip').classList.toggle('open')">
+        <span class="bus-line-badge">Γραμμή 10</span>
+        <span class="bus-route">
+          <span lang="el">Αεροδρόμιο · Γάζι · Καβροχώρι</span>
+          <span lang="en">Airport · Gazi · Kavrochori</span>
+        </span>
+        <span class="bus-freq">
+          <span lang="el">7×/ημέρα</span>
+          <span lang="en">7×/day</span>
+        </span>
+        <span class="bus-info-btn">i</span>
+      </div>
+      <div class="bus-schedule">
+        <table>
+          <thead>
+            <tr>
+              <th lang="el">Αναχ. Αεροδρομίου</th>
+              <th lang="en">Departs Airport</th>
+              <th lang="el">Άφιξη Καβροχώρι</th>
+              <th lang="en">Arrives Kavrochori</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>06:32</td><td>07:15</td><td class="note" lang="el">· 07:25 από Δημαρχείο Γαζίου</td><td class="note" lang="en">· 07:25 from Gazi Town Hall</td></tr>
+            <tr><td>10:15</td><td>11:10</td><td></td><td></td></tr>
+            <tr><td>12:25</td><td>13:30</td><td></td><td></td></tr>
+            <tr><td>13:53</td><td>14:45</td><td></td><td></td></tr>
+            <tr><td>14:20</td><td>15:10</td><td></td><td></td></tr>
+            <tr><td>17:35</td><td>18:20</td><td></td><td></td></tr>
+            <tr><td>20:35</td><td>21:15</td><td></td><td></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.6rem">
+          <span lang="el">Αστικό ΚΤΕΛ Ηρακλείου · Καθημερινές · Ισχύς από 20/04/2026</span>
+          <span lang="en">Heraklion City Bus · Weekdays · Valid from 20/04/2026</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -604,8 +661,8 @@
     <span class="section-kicker" lang="en">The spaces</span>
     <h2 lang="el">Δύο κατοικίες, μία ιδιοκτησία.</h2>
     <h2 lang="en">Two residences, one property.</h2>
-    <p class="section-intro" lang="el">Η δομή του ακινήτου προσφέρει σπάνια ευελιξία: μια κύρια μεζονέτα για την οικογένεια και ένα πλήρες αυτόνομο διαμέρισμα στο ημιυπόγειο με ξεχωριστή είσοδο — ξενώνας για επισκέπτες, γραφείο εξ αποστάσεως εργασίας, ή πηγή εισοδήματος.</p>
-    <p class="section-intro" lang="en">The property offers unusual flexibility: a main maisonette for the family and a complete self-contained apartment in the semi-basement with its own entrance — guest house, home office, or rental income.</p>
+    <p class="section-intro" lang="el">Η δομή του ακινήτου προσφέρει σπάνια ευελιξία: μια κύρια μεζονέτα για την οικογένεια και ένα πλήρες αυτόνομο διαμέρισμα κήπου με ξεχωριστή είσοδο — ξενώνας για επισκέπτες, γραφείο εξ αποστάσεως εργασίας, ή πηγή εισοδήματος.</p>
+    <p class="section-intro" lang="en">The property offers unusual flexibility: a main maisonette for the family and a complete self-contained garden-level apartment with its own entrance — guest house, home office, or rental income.</p>
 
     <div class="spaces-grid" style="margin-top: 3rem;">
       <div class="space">
@@ -643,8 +700,8 @@
       </div>
 
       <div class="space">
-        <div class="space-label" lang="el">ΗΜΙΥΠΟΓΕΙΟ · 120 τ.μ.</div>
-        <div class="space-label" lang="en">SEMI-BASEMENT · 120 sqm</div>
+        <div class="space-label" lang="el">ΗΜΙΙΣΟΓΕΙΟ · 120 τ.μ.</div>
+        <div class="space-label" lang="en">GARDEN LEVEL · 120 sqm</div>
         <h3 lang="el">Αυτόνομο Διαμέρισμα</h3>
         <h3 lang="en">Self-Contained Apartment</h3>
         <ul>
@@ -674,8 +731,8 @@
       <span style="font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.75;" lang="en">Proven income</span>
       <h3 lang="el">Τρία χρόνια ως Airbnb</h3>
       <h3 lang="en">Three years as an Airbnb</h3>
-      <p lang="el">Το ημιυπόγειο διαμέρισμα λειτούργησε επιτυχώς ως Airbnb για τρία συνεχόμενα χρόνια. Το κοινό που φιλοξενήθηκε ήταν ακριβώς αυτό που κάνει το Καβροχώρι ελκυστικό: ακαδημαϊκοί, αρχαιολόγοι λόγω Κνωσού, και επιλεκτικοί τουρίστες.</p>
-      <p lang="en">The semi-basement apartment operated successfully as an Airbnb for three consecutive years, hosting exactly the audience that makes Kavrochori attractive: academics, archaeologists drawn to Knossos, and discerning travellers.</p>
+      <p lang="el">Το διαμέρισμα κήπου λειτούργησε επιτυχώς ως Airbnb για τρία συνεχόμενα χρόνια. Το κοινό που φιλοξενήθηκε ήταν ακριβώς αυτό που κάνει το Καβροχώρι ελκυστικό: ακαδημαϊκοί, αρχαιολόγοι λόγω Κνωσού, και επιλεκτικοί τουρίστες.</p>
+      <p lang="en">The garden-level apartment operated successfully as an Airbnb for three consecutive years, hosting exactly the audience that makes Kavrochori attractive: academics, archaeologists drawn to Knossos, and discerning travellers.</p>
       <div>
         <div class="stat">
           <span class="stat-num">3</span>
@@ -756,9 +813,9 @@
       <div class="gallery-item"><img src="images/outdoor-garden.png" alt="Κήπος" data-caption-el="Κήπος με δάφνη και οπωροφόρα" data-caption-en="Garden with laurel and fruit trees"><span class="gallery-caption" lang="el">Κήπος</span><span class="gallery-caption" lang="en">Garden</span></div>
       <div class="gallery-item"><img src="images/exterior-east.png" alt="Ανατολική όψη και πρόσβαση" data-caption-el="Ανατολική όψη και πρόσβαση" data-caption-en="East side and access"><span class="gallery-caption" lang="el">Ανατολική όψη</span><span class="gallery-caption" lang="en">East side</span></div>
       <div class="gallery-item"><img src="images/entrance-stairs.png" alt="Είσοδος μεζονέτας" data-caption-el="Κεντρική είσοδος μεζονέτας" data-caption-en="Main entrance"><span class="gallery-caption" lang="el">Είσοδος</span><span class="gallery-caption" lang="en">Entrance</span></div>
-      <div class="gallery-item large"><img src="images/basement-living.png" alt="Ημιυπόγειο — Καθιστικό" data-caption-el="Ημιυπόγειο διαμέρισμα — ενιαίος χώρος" data-caption-en="Semi-basement — open living area"><span class="gallery-caption" lang="el">Ημιυπόγειο διαμέρισμα</span><span class="gallery-caption" lang="en">Semi-basement apartment</span></div>
+      <div class="gallery-item large"><img src="images/basement-living.png" alt="Διαμέρισμα κήπου — Καθιστικό" data-caption-el="Διαμέρισμα κήπου — ενιαίος χώρος" data-caption-en="Garden-level apartment — open living area"><span class="gallery-caption" lang="el">Διαμέρισμα κήπου</span><span class="gallery-caption" lang="en">Garden-level apartment</span></div>
       <div class="gallery-item"><img src="images/main-entrance.png" alt="Είσοδος σπιτιού" data-caption-el="Ανατολική-νότια όψη" data-caption-en="East-south view"><span class="gallery-caption" lang="el">Κύρια είσοδος</span><span class="gallery-caption" lang="en">Main entry</span></div>
-      <div class="gallery-item"><img src="images/basement-entrance.png" alt="Ξεχωριστή είσοδος ημιυπογείου" data-caption-el="Ξεχωριστή είσοδος ημιυπογείου" data-caption-en="Independent basement entrance"><span class="gallery-caption" lang="el">Είσοδος ημιυπογείου</span><span class="gallery-caption" lang="en">Basement entrance</span></div>
+      <div class="gallery-item"><img src="images/basement-entrance.png" alt="Ξεχωριστή είσοδος διαμερίσματος κήπου" data-caption-el="Ξεχωριστή είσοδος διαμερίσματος κήπου" data-caption-en="Independent garden-level entrance"><span class="gallery-caption" lang="el">Είσοδος διαμερίσματος</span><span class="gallery-caption" lang="en">Garden entrance</span></div>
     </div>
 
     <!-- Lightbox -->
@@ -910,24 +967,52 @@
         <h4 lang="en">Title deeds</h4>
         <p lang="el">Πλήρεις, καταχωρημένοι στο Υποθηκοφυλακείο Ηρακλείου.</p>
         <p lang="en">Complete, registered with the Heraklion Land Registry.</p>
+        <ul style="list-style:none;padding:0.5rem 0 0;margin:0;">
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Συμβόλαιο αγοράς (1995)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Purchase contract (1995)</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Δηλωτικό παραχώρησης κοινόχρηστου χώρου (1996)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Declaration of transfer to common use (1996)</li>
+        </ul>
       </div>
       <div class="feature">
         <h4 lang="el">Τακτοποίηση Ν. 4495/2017</h4>
         <h4 lang="en">Regularisation (L.4495/2017)</h4>
         <p lang="el">Ολοκληρωμένη: τεχνική έκθεση, στατικός έλεγχος, σχέδια.</p>
         <p lang="en">Complete: technical report, structural check, drawings.</p>
+        <ul style="list-style:none;padding:0.5rem 0 0;margin:0;">
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Δήλωση τακτοποίησης (αρ. 13347619)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Regularisation declaration (no. 13347619)</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Τεχνική έκθεση</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Technical report</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Τεχνική έκθεση στατικού ελέγχου</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Structural assessment report</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Κατόψεις (Κ1–Κ4)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Floor plans (K1–K4)</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Τομές (Τ1–Τ2)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Cross-sections (T1–T2)</li>
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Διάγραμμα κάλυψης (Δ1)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Site coverage diagram (D1)</li>
+        </ul>
       </div>
       <div class="feature">
         <h4 lang="el">Τοπογραφικό διάγραμμα</h4>
         <h4 lang="en">Topographic survey</h4>
         <p lang="el">Ενημερωμένο (Οκτώβριος 2025).</p>
         <p lang="en">Updated October 2025.</p>
+        <ul style="list-style:none;padding:0.5rem 0 0;margin:0;">
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Τοπογραφικό διάγραμμα Φουκαράκη (Οκτ 2025)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>Foukarakis topographic survey (Oct 2025)</li>
+        </ul>
       </div>
       <div class="feature">
         <h4 lang="el">Πιστοποιητικό Ενεργειακής Απόδοσης</h4>
         <h4 lang="en">Energy performance certificate</h4>
         <p lang="el">Κλάση Γ, ισχύει έως Φεβρουάριος 2032.</p>
         <p lang="en">Class C, valid until February 2032.</p>
+        <ul style="list-style:none;padding:0.5rem 0 0;margin:0;">
+          <li lang="el" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>ΠΕΑ αρ. 48978 (ισχύς έως 11/02/2032)</li>
+          <li lang="en" style="font-size:0.82rem;color:var(--text-muted);padding:0.15rem 0 0.15rem 1.1rem;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span>EPC no. 48978 (valid until 11/02/2032)</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -936,8 +1021,8 @@
 <!-- CONTACT -->
 <section id="contact" class="contact-section">
   <div class="container">
-    <span class="section-kicker" style="color: rgba(255,255,255,0.7);" lang="el">Επικοινωνία</span>
-    <span class="section-kicker" style="color: rgba(255,255,255,0.7);" lang="en">Contact</span>
+    <span class="section-kicker" style="color: rgba(255,255,255,0.88);" lang="el">Επικοινωνία</span>
+    <span class="section-kicker" style="color: rgba(255,255,255,0.88);" lang="en">Contact</span>
     <h2 lang="el">Μια συζήτηση χωρίς δεσμεύσεις.</h2>
     <h2 lang="en">An informal first conversation.</h2>
 
@@ -951,8 +1036,8 @@
         </p>
         <p>✉ <a href="mailto:home@kavrochori.gr">home@kavrochori.gr</a></p>
         <p>☎ <a href="tel:+306972837874">+30 6972 837 874</a></p>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.75;" lang="el">Τιμή: κατόπιν επικοινωνίας.</p>
-        <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.75;" lang="en">Price: upon request.</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.75);" lang="el">Τιμή: κατόπιν επικοινωνίας.</p>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.75);" lang="en">Price: upon request.</p>
       </div>
 
       <form class="contact-form" action="mailto:home@kavrochori.gr" method="post" enctype="text/plain">
