@@ -1390,7 +1390,12 @@
         <p style="margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.75);" lang="nl">Prijs: op aanvraag.</p>
       </div>
 
-      <form class="contact-form" action="mailto:home@kavrochori.gr" method="post" enctype="text/plain">
+      <form class="contact-form" action="https://formsubmit.co/home@kavrochori.gr" method="POST">
+        <input type="hidden" name="_subject" value="Νέο μήνυμα από kavrochori.gr">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
         <label lang="el" for="name">Όνομα</label>
         <label lang="en" for="name">Name</label>
         <label lang="de" for="name">Name</label>
