@@ -14,12 +14,14 @@
 <meta property="og:locale:alternate" content="nl_NL">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kavrochori.gr/">
-<meta property="og:image" content="https://kavrochori.gr/images/exterior-street.jpg">
+<meta property="og:image" content="https://kavrochori.gr/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Μεζονέτα με κήπο στο Καβροχώρι Γαζίου, Ηράκλειο Κρήτης">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Μεζονέτα — Ευρύτερη περιοχή Καβροχωρίου, Ηράκλειο">
 <meta name="twitter:description" content="Ανεξάρτητη κατοικία με αυτόνομο διαμέρισμα κήπου. Οικόπεδο 617 τ.μ., ξυλόφουρνος, θέα βουνό.">
-<meta name="twitter:image" content="https://kavrochori.gr/images/exterior-street.jpg">
+<meta name="twitter:image" content="https://kavrochori.gr/og-image.jpg">
 <link rel="canonical" href="https://kavrochori.gr/">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
@@ -1603,5 +1605,54 @@
   }
   .map-poi-label::before { display: none; }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Residence",
+  "name": "Μεζονέτα με αυτόνομο διαμέρισμα κήπου — Καβροχώρι Γαζίου",
+  "description": "Ανεξάρτητη κατοικία 262 τ.μ. (μεζονέτα 172 τ.μ. + διαμέρισμα κήπου 90 τ.μ.) σε οικόπεδο 617 τ.μ. στα δυτικά του Ηρακλείου. 7 λεπτά από ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο Κρήτης. Ξυλόφουρνος, θέα βουνό, ενεργειακή κλάση Γ.",
+  "url": "https://kavrochori.gr/",
+  "image": [
+    "https://kavrochori.gr/images/exterior-street.jpg",
+    "https://kavrochori.gr/images/exterior-entrance.jpg",
+    "https://kavrochori.gr/images/living-fireplace.jpg",
+    "https://kavrochori.gr/images/living-grand.jpg",
+    "https://kavrochori.gr/images/kitchen.jpg",
+    "https://kavrochori.gr/images/bedroom-balcony.jpg",
+    "https://kavrochori.gr/images/bathroom.jpg",
+    "https://kavrochori.gr/images/basement-overview.jpg",
+    "https://kavrochori.gr/images/sunroom-wood.jpg",
+    "https://kavrochori.gr/images/wood-oven.jpg"
+  ],
+  "floorSize": {
+    "@type": "QuantitativeValue",
+    "value": 262,
+    "unitCode": "MTK"
+  },
+  "yearBuilt": 1998,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Καβροχώρι, Γάζι",
+    "addressRegion": "Ηράκλειο Κρήτης",
+    "addressCountry": "GR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.308,
+    "longitude": 25.047
+  },
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Wood-fired oven", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "3-car parking", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Self-contained apartment", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Oil central heating", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Solar water heater", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Three-phase power", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Energy class C", "value": true }
+  ]
+}
+</script>
 </body>
 </html>
