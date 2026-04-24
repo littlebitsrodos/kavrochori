@@ -96,45 +96,77 @@
     nav { position: relative; }
   }
 
-  /* Hero — Glass Card */
+  /* Hero — Editorial Cover */
   .hero {
-    padding: 4rem 0 5rem;
-    background: url('/images/exterior-street.jpg') center/cover no-repeat;
-    background: image-set(url('/images/exterior-street.webp') type('image/webp'), url('/images/exterior-street.jpg') type('image/jpeg')) center/cover no-repeat;
-    min-height: 70vh;
-    display: flex; align-items: center;
-    position: relative;
+    padding: 0;
+    background: url('/images/exterior-street.jpg') center bottom / cover no-repeat;
+    background: image-set(url('/images/exterior-street.webp') type('image/webp'), url('/images/exterior-street.jpg') type('image/jpeg')) center bottom / cover no-repeat;
+    min-height: 88vh;
+    max-height: 900px;
+    display: flex; align-items: flex-start;
+    position: relative; isolation: isolate;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 80% at 25% 45%, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.15) 75%, transparent 95%),
+      linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 25%, transparent 50%);
+    z-index: 0;
   }
   .hero .container {
+    position: relative; z-index: 1;
     width: 100%;
-    max-width: 800px;
-    margin-left: max(1.5rem, calc((100vw - 1100px) / 2));
-    margin-right: auto;
-    background: rgba(250,250,247,0.78);
-    backdrop-filter: blur(18px) saturate(1.1);
-    -webkit-backdrop-filter: blur(18px) saturate(1.1);
-    padding: 2.5rem 2.75rem;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.5);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    padding-top: 5rem;
   }
   .hero-badge {
     display: inline-block;
     background: transparent;
     padding: 0 0 0.4rem 0;
-    border-radius: 0;
     font-size: 0.78rem;
-    color: var(--accent-dark);
+    color: #ffffff;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     border: none;
-    border-bottom: 1px solid var(--accent);
+    border-bottom: 1px solid rgba(255,255,255,0.55);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   }
-  .hero h1 { max-width: 720px; margin-bottom: 1rem; color: var(--text); text-shadow: none; }
-  .hero .subtitle { max-width: 600px; font-size: 1.1rem; color: var(--text-muted); text-shadow: none; margin-bottom: 1.75rem; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 2rem; color: var(--text-muted); text-shadow: none; font-size: 0.9rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-  .hero-meta strong { font-weight: 500; color: var(--accent-dark); }
+  .hero h1 {
+    max-width: 600px;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.45), 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .hero .subtitle {
+    max-width: 500px;
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 0 1px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.5);
+    margin-bottom: 0;
+  }
+  .hero-garden-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #ffffff;
+    border-left: 3px solid var(--terracotta);
+    padding-left: 1rem;
+    margin-top: 1.75rem;
+    max-width: 480px;
+    text-shadow: 0 1px 16px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.5);
+  }
+  @media (max-width: 768px) {
+    .hero {
+      background-position: center 30%;
+      min-height: 78vh;
+    }
+    .hero::before {
+      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 35%, transparent 60%);
+    }
+    .hero .container { padding-top: 3rem; }
+    .hero-badge { font-size: 0.72rem; }
+  }
 
   /* Key facts strip */
   .key-facts {
@@ -644,27 +676,17 @@
     <span class="hero-badge" lang="de">Raum Kavrochori · Heraklion, Kreta</span>
     <span class="hero-badge" lang="nl">Omgeving Kavrochori · Heraklion, Kreta</span>
     <h1 lang="el">Ανεξάρτητη κατοικία<br>με αυτόνομο ξενώνα.</h1>
-    <h1 lang="en">Independent residence<br>with a self-contained guesthouse.</h1>
-    <h1 lang="de">Freistehendes Wohnhaus<br>mit eigenständigem Gästehaus.</h1>
-    <h1 lang="nl">Vrijstaande woning<br>met een zelfstandig gastenverblijf.</h1>
+    <h1 lang="en">Independent residence with a self-contained guesthouse.</h1>
+    <h1 lang="de">Freistehendes Wohnhaus mit eigenständigem Gästehaus.</h1>
+    <h1 lang="nl">Vrijstaande woning met een zelfstandig gastenverblijf.</h1>
     <p class="subtitle" lang="el">Μεζονέτα 172 τ.μ. και διαμέρισμα κήπου 90 τ.μ. σε οικόπεδο 617 τ.μ. Επτά λεπτά από ΠΑΓΝΗ, ΙΤΕ, Πανεπιστήμιο Κρήτης.</p>
     <p class="subtitle" lang="en">172 sqm maisonette and 90 sqm garden-level apartment on a 617 sqm plot. Seven minutes from the University Hospital, FORTH, and the University of Crete.</p>
     <p class="subtitle" lang="de">172 m² Maisonette und 90 m² Gartenwohnung auf einem 617 m² großen Grundstück. Sieben Minuten vom Universitätsklinikum, FORTH und der Universität Kreta.</p>
     <p class="subtitle" lang="nl">Maisonette van 172 m² en tuinappartement van 90 m² op een perceel van 617 m². Zeven minuten van het universiteitsziekenhuis, FORTH en de Universiteit van Kreta.</p>
-    <div class="hero-meta">
-      <span lang="el"><strong>262 τ.μ.</strong> συνολική δόμηση</span>
-      <span lang="en"><strong>262 sqm</strong> total</span>
-      <span lang="de"><strong>262 m²</strong> gesamt</span>
-      <span lang="nl"><strong>262 m²</strong> totaal</span>
-      <span lang="el"><strong>617 τ.μ.</strong> οικόπεδο</span>
-      <span lang="en"><strong>617 sqm</strong> plot</span>
-      <span lang="de"><strong>617 m²</strong> Grundstück</span>
-      <span lang="nl"><strong>617 m²</strong> perceel</span>
-      <span lang="el"><strong>1996</strong> άδεια · <strong>1998</strong> κατασκευή</span>
-      <span lang="en"><strong>1996</strong> permit · <strong>1998</strong> built</span>
-      <span lang="de"><strong>1996</strong> Genehmigung · <strong>1998</strong> gebaut</span>
-      <span lang="nl"><strong>1996</strong> vergunning · <strong>1998</strong> gebouwd</span>
-    </div>
+    <p class="hero-garden-note" lang="el">Σε κήπο 617 τ.μ. με ώριμη λεμονιά, πορτοκαλιά και ξυλόφουρνο.</p>
+    <p class="hero-garden-note" lang="en">Set in a 617 sqm garden with mature lemon and orange trees and a wood oven.</p>
+    <p class="hero-garden-note" lang="de">In einem 617 m² großen Garten mit altem Zitronen-, Orangenbaum und Holzofen.</p>
+    <p class="hero-garden-note" lang="nl">In een tuin van 617 m² met volgroeide citroen- en sinaasappelboom en houtoven.</p>
   </div>
 </header>
 
