@@ -25,48 +25,102 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 MASTER = os.path.join(ROOT, "index.html")
 
 VARIANTS = {
-    "en": {"locale": "en_US"},
-    "de": {"locale": "de_DE"},
-    "nl": {"locale": "nl_NL"},
+    "en": {
+        "locale": "en_US",
+        "title": "Maisonette with self-contained garden apartment — Kavrochori, Heraklion, Crete",
+        "description": "Independent 262 sqm home on a 617 sqm plot west of Heraklion. 7 minutes from the University Hospital (PAGNI), FORTH, and the University of Crete. Ideal for doctors, researchers, and academics.",
+        "og_title": "Maisonette — Kavrochori, Heraklion, Crete",
+        "og_description": "Independent home with a self-contained garden-level apartment. 617 sqm plot, wood-fired oven, mountain views.",
+        "og_image_alt": "Maisonette with garden in Kavrochori, Heraklion, Crete",
+    },
+    "de": {
+        "locale": "de_DE",
+        "title": "Freistehendes Haus mit eigenständiger Gartenwohnung — Kavrochori, Heraklion, Kreta",
+        "description": "Freistehendes Wohnhaus, 262 m² auf 617 m² Grundstück westlich von Heraklion. 7 Minuten vom Universitätsklinikum, FORTH und der Universität Kreta. Ideal für Ärzte, Forscher und Akademiker.",
+        "og_title": "Freistehendes Haus — Kavrochori, Heraklion, Kreta",
+        "og_description": "Freistehendes Haus mit eigenständiger Gartenwohnung im Souterrain. 617 m² Grundstück, Holzofen, Bergblick.",
+        "og_image_alt": "Freistehendes Haus mit Garten in Kavrochori, Heraklion, Kreta",
+    },
+    "nl": {
+        "locale": "nl_NL",
+        "title": "Vrijstaand huis met zelfstandig tuinappartement — Kavrochori, Heraklion, Kreta",
+        "description": "Vrijstaand huis, 262 m² op 617 m² perceel ten westen van Heraklion. 7 minuten van het Universiteitsziekenhuis (PAGNI), FORTH en de Universiteit van Kreta. Ideaal voor artsen, onderzoekers en academici.",
+        "og_title": "Vrijstaand huis — Kavrochori, Heraklion, Kreta",
+        "og_description": "Vrijstaande woning met een zelfstandig tuinappartement op het souterrain. 617 m² perceel, houtgestookte oven, bergzicht.",
+        "og_image_alt": "Vrijstaand huis met tuin in Kavrochori, Heraklion, Kreta",
+    },
 }
 
 
 def normalize_asset_paths(html: str) -> str:
     """Convert relative 'images/...' refs to root-absolute '/images/...'.
 
-    Idempotent: skips matches already starting with '/images/' because the
-    regex requires 'images/' preceded by '="' (no leading slash).
+    Covers every context that references images/ in the markup:
+      - attrs: src=, href=, data-full=, data-thumb=, srcset= (first value)
+      - srcset continuations (comma-separated values)
+      - inline CSS `url(images/...)` / `url('images/...')` / `url("images/...")`
+
+    Idempotent: regexes require the 'images/' to have NO leading slash,
+    so re-running after normalization is a no-op.
     """
-    return re.sub(
-        r'((?:src|href|data-full|data-thumb)=")images/',
+    # 1. Simple attributes
+    html = re.sub(
+        r'((?:src|href|data-full|data-thumb|srcset)=")images/',
         r"\1/images/",
         html,
     )
+    # 2. srcset comma-separated continuations: `, images/...` or `,images/...`
+    html = re.sub(r"(,\s*)images/", r"\1/images/", html)
+    # 3. CSS url() — optional quote around the URL
+    html = re.sub(r"(url\(['\"]?)images/", r"\1/images/", html)
+    return html
 
 
-def generate_variant(master_html: str, lang: str, locale: str) -> str:
+def _swap_meta(html: str, attr: str, value: str, new_content: str) -> str:
+    """Replace the `content="..."` of a <meta attr="value">. Regex-safe."""
+    pattern = (
+        rf'(<meta\s+{attr}="{re.escape(value)}"\s+content=")[^"]*(")'
+    )
+    return re.sub(pattern, lambda m: f"{m.group(1)}{new_content}{m.group(2)}", html)
+
+
+def generate_variant(master_html: str, lang: str, cfg: dict) -> str:
     html = master_html
+    locale = cfg["locale"]
+
     # 1. <html lang="el"> -> <html lang="XX">
     html = html.replace('<html lang="el">', f'<html lang="{lang}">', 1)
     # 2. <body> -> <body class="XX">
     html = html.replace("<body>", f'<body class="{lang}">', 1)
-    # 3. canonical
+    # 3. canonical + og:url
     html = html.replace(
         '<link rel="canonical" href="https://kavrochori.gr/">',
         f'<link rel="canonical" href="https://kavrochori.gr/{lang}/">',
     )
-    # 4. og:url
     html = html.replace(
         '<meta property="og:url" content="https://kavrochori.gr/">',
         f'<meta property="og:url" content="https://kavrochori.gr/{lang}/">',
     )
-    # 5. og:locale (swap primary; leave alternates list alone)
+    # 4. og:locale (swap primary; alternates list stays)
     html = html.replace(
         '<meta property="og:locale" content="el_GR">',
         f'<meta property="og:locale" content="{locale}">',
     )
-    # 6. Move `class="active"` from ΕΛ button to the target-lang button
-    #    so the toggle UI reflects which variant the user is on.
+    # 5. Localize <title> — only the first occurrence (head title).
+    html = re.sub(
+        r"<title>[^<]*</title>",
+        f"<title>{cfg['title']}</title>",
+        html,
+        count=1,
+    )
+    # 6. Localize meta description / og:title / og:description / twitter:*
+    html = _swap_meta(html, 'name',     'description',         cfg["description"])
+    html = _swap_meta(html, 'property', 'og:title',            cfg["og_title"])
+    html = _swap_meta(html, 'property', 'og:description',      cfg["og_description"])
+    html = _swap_meta(html, 'property', 'og:image:alt',        cfg["og_image_alt"])
+    html = _swap_meta(html, 'name',     'twitter:title',       cfg["og_title"])
+    html = _swap_meta(html, 'name',     'twitter:description', cfg["og_description"])
+    # 7. Move `class="active"` from ΕΛ button to the target-lang button.
     html = html.replace(
         "<button class=\"active\" onclick=\"setLang('el', event)\">",
         "<button onclick=\"setLang('el', event)\">",
@@ -97,7 +151,7 @@ def main() -> int:
     for lang, cfg in VARIANTS.items():
         outdir = os.path.join(ROOT, lang)
         os.makedirs(outdir, exist_ok=True)
-        variant = generate_variant(master, lang, cfg["locale"])
+        variant = generate_variant(master, lang, cfg)
         outpath = os.path.join(outdir, "index.html")
         with open(outpath, "w", encoding="utf-8") as f:
             f.write(variant)
