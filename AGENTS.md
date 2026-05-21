@@ -28,22 +28,22 @@ without a clear new reason:
 - **Multiple HTML pages.** `/privacy.html` and `/404.html` are the only exceptions.
   Anything new should fit on the index or be argued for explicitly.
 
-## Skill routing
+## Agent workflow
 
-When the user's request matches an available skill, ALWAYS invoke it using the Skill
-tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
-The skill has specialized workflows that produce better results than ad-hoc answers.
+Default to read-only inspection unless the user explicitly asks for edits.
 
-Key routing rules:
-- Product ideas, "is this worth building", brainstorming → invoke office-hours
-- Bugs, errors, "why is this broken", 500 errors → invoke investigate
-- Ship, deploy, push, create PR → invoke ship
-- QA, test the site, find bugs → invoke qa
-- Code review, check my diff → invoke review
-- Update docs after shipping → invoke document-release
-- Weekly retro → invoke retro
-- Design system, brand → invoke design-consultation
-- Visual audit, design polish → invoke design-review
-- Architecture review → invoke plan-eng-review
-- Save progress, checkpoint, resume → invoke checkpoint
-- Code quality, health check → invoke health
+Before making changes:
+- Read the relevant file/range first and preserve the static, no-build nature of the site.
+- Keep the site privacy-first: do not add analytics, tracking, cookies, or third-party widgets unless explicitly justified.
+- Do not add backend dependencies, build tooling, CI, tests, service workers, or extra pages without a clear new reason.
+- Do not deploy, push, or change repository remotes without explicit user approval.
+
+When editing:
+- Keep changes minimal and localized.
+- Preserve multilingual variants (`/en`, `/de`, `/nl`, `/he`, `/fr`) when content or SEO changes affect the public page.
+- Validate HTML/JSON-LD syntax where relevant.
+- Summarize changed files and any follow-up risks clearly.
+
+Communication:
+- Prefer concise Greek replies unless the user asks otherwise.
+- State assumptions explicitly when context is incomplete.
